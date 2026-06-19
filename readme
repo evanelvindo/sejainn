@@ -1,0 +1,33 @@
+ <div class="mb-3">
+          <label class="form-label">Pilih Spesialisasi Layanan</label>
+          <select name="layanan_id" class="form-select" required>
+            <option value="" disabled selected>
+              -- Pilih Layanan Utama --
+            </option>
+
+            <optgroup label="💻 HUB 1: IT & Kreatif">
+              <option value="1">1.1 Servis & Upgrade Laptop</option>
+              <option value="2">1.2 Instalasi Software Spesifik</option>
+              <option value="3">1.3 Desain Grafis & Edit Video</option>
+              <option value="4">1.4 Dokumentasi Dadakan</option>
+            </optgroup>
+
+            <optgroup label="🧹 HUB 2: Kosan & Kebersihan">
+              <option value="5">2.1 Deep Cleaning Kamar Kos</option>
+              <option value="6">2.2 Cuci Sepatu & Helm</option>
+              <option value="7">2.3 Setrika Baju Kiloan</option>
+              <option value="8">2.4 Bantuan Angkut Pindahan</option>
+            </optgroup>
+
+            <optgroup label="🛵 HUB 3: Jastip & Bantuan Waktu">
+              <option value="9">3.1 Jastip Print & Jilid</option>
+              <option value="10">3.2 Jastip Beli Makanan</option>
+              <option value="11">3.3 Jasa Antri & Jaga Stand</option>
+              <option value="12">3.4 Bantuan Asisten Riset</option>
+            </optgroup>
+
+            <optgroup label="➕ HUB 4: Jasa Kustom">
+              <option value="13">4.1 Request Jasa Kustom</option>
+            </optgroup>
+          </select>
+        </div>

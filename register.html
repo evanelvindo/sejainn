@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Daftar Mitra Sejaiin Hub</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Plus Jakarta Sans", sans-serif;
+        background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+      }
+      .card-register {
+        border-radius: 24px;
+        border: none;
+        background-color: #ffffff;
+      }
+      .btn-primary {
+        background-color: #0d6efd;
+        border-radius: 12px;
+        transition: 0.3s ease;
+      }
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(13, 110, 253, 0.3);
+      }
+      .btn-back {
+        color: #64748b;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.9rem;
+        transition: color 0.2s;
+        display: inline-flex;
+        align-items: center;
+      }
+      .btn-back:hover {
+        color: #0d6efd;
+      }
+      .form-floating > label {
+        padding-left: 1.25rem;
+      }
+      .telegram-hint {
+        font-size: 0.8rem;
+        color: #6c757d;
+        margin-top: 5px;
+      }
+    </style>
+  </head>
+  <body class="py-5 d-flex align-items-center">
+    <div class="container" style="max-width: 650px">
+      <div class="mb-3 ps-2">
+        <a href="/" class="btn-back">
+          <i class="bi bi-arrow-left-circle-fill me-2 fs-5"></i> Kembali ke
+          Beranda Hub
+        </a>
+      </div>
+
+      <div class="card card-register shadow-lg p-4 p-md-5">
+        <div class="text-center mb-4">
+          <div class="fs-1 mb-2">🚀</div>
+          <h2 class="fw-bold text-primary">Daftar Mitra Sejaiin</h2>
+          <p class="text-muted">
+            Lengkapi data identitas untuk mulai mengambil order logistik kampus.
+          </p>
+        </div>
+
+        {% if sukses_pesan %}
+        <div
+          class="alert alert-success alert-dismissible fade show text-center mb-4"
+          role="alert"
+        >
+          <i class="bi bi-check-circle-fill me-2"></i>
+          <strong>{{ sukses_pesan }}</strong>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="alert"
+            aria-label="Close"
+          ></button>
+        </div>
+        {% endif %}
+
+        <form
+          id="registerForm"
+          action="/register"
+          method="POST"
+          enctype="multipart/form-data"
+          class="needs-validation"
+          novalidate
+        >
+          <div class="form-floating mb-3">
+            <input
+              type="text"
+              name="nama_lengkap"
+              class="form-control rounded-3"
+              id="nama"
+              placeholder="Nama Lengkap"
+              maxlength="50"
+              required
+            />
+            <label for="nama">Nama Lengkap (Sesuai KTP)</label>
+            <div class="invalid-feedback">
+              Nama lengkap wajib diisi (Maksimal 50 karakter).
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <div class="form-floating">
+                <input
+                  type="text"
+                  name="nik"
+                  class="form-control rounded-3"
+                  id="nik"
+                  placeholder="NIK"
+                  pattern="\d{16}"
+                  minlength="16"
+                  maxlength="16"
+                  required
+                />
+                <label for="nik">NIK (16 Digit)</label>
+                <div class="invalid-feedback">
+                  NIK valid harus berupa tepat 16 digit angka.
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <div class="form-floating">
+                <input
+                  type="text"
+                  name="no_rekening"
+                  class="form-control rounded-3"
+                  id="rek"
+                  placeholder="Nomor Rekening"
+                  pattern="[0-9]{10,20}"
+                  minlength="10"
+                  maxlength="20"
+                  required
+                />
+                <label for="rek">Nomor Rekening Bank</label>
+                <div class="invalid-feedback">
+                  Masukkan nomor rekening valid (10-20 digit angka).
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input
+              type="tel"
+              name="no_whatsapp"
+              class="form-control rounded-3"
+              id="wa"
+              placeholder="Nomor WhatsApp"
+              pattern="^(08)[0-9]{8,13}$"
+              minlength="10"
+              maxlength="15"
+              required
+            />
+            <label for="wa">Nomor WhatsApp (Contoh: 08123456789)</label>
+            <div class="invalid-feedback">
+              Gunakan format nomor lokal aktif diawali '08' (10-15 digit angka).
+            </div>
+          </div>
+
+          <div class="form-floating mb-3">
+            <div>
+              <div class="form-floating">
+                <input
+                  type="text"
+                  name="telegram_id_mitra"
+                  class="form-control rounded-3"
+                  id="telegram"
+                  placeholder="Telegram ID"
+                  pattern="[0-9]{7,12}"
+                  minlength="7"
+                  maxlength="12"
+                  required
+                />
+                <label for="telegram">Telegram ID Anda</label>
+                <div class="invalid-feedback">
+                  ID Telegram numerik wajib diisi secara valid (7-12 digit
+                  angka).
+                </div>
+              </div>
+              <div class="telegram-hint d-flex align-items-center gap-1 ps-1">
+                <i class="bi bi-info-circle"></i> Belum tahu ID numerik Anda?
+                <a
+                  href="https://t.me/userinfobot"
+                  target="_blank"
+                  class="fw-semibold"
+                  >Cek di @userinfobot</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="ktp" class="form-label text-muted small fw-semibold">
+              <i class="bi bi-image me-1"></i> Unggah Foto KTP Jelas (.png /
+              .jpg / .jpeg)
+            </label>
+            <input
+              type="file"
+              name="ktp_foto"
+              class="form-control rounded-3 py-2"
+              id="ktp"
+              accept="image/png, image/jpeg, image/jpg"
+              required
+            />
+            <div class="invalid-feedback">
+              Wajib mengunggah berkas foto identitas KTP (.png/.jpg/.jpeg).
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <label class="form-label text-muted small fw-semibold">
+              <i class="bi bi-briefcase me-1"></i> Peminatan Divisi / Keahlian
+              Utama
+            </label>
+            <select
+              name="layanan_id"
+              class="form-select rounded-3 py-2"
+              required
+            >
+              <option value="" disabled selected>
+                -- Pilih Spesialisasi Keahlian --
+              </option>
+              {% for item in layanan %}
+              <option value="{{ item.id }}">
+                {{ item.nama_layanan }} ({{ item.kategori }})
+              </option>
+              {% endfor %}
+            </select>
+            <div class="invalid-feedback">
+              Silakan tentukan kluster divisi keahlian operasional Anda.
+            </div>
+          </div>
+
+          <div class="form-check mb-4">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="terms"
+              required
+            />
+            <label class="form-check-label text-muted small" for="terms">
+              Saya bersedia mematuhi aturan platform dan menyetujui parameter
+              pembagian hasil upah (90:10) SEJAIIN HUB.
+            </label>
+            <div class="invalid-feedback">
+              Anda harus menyetujui klausul komisi sebelum mengirimkan berkas
+              pendaftaran.
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            id="submitBtn"
+            class="btn btn-primary btn-lg w-100 fw-bold py-3 rounded-3"
+          >
+            Kirim Berkas Pendaftaran
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      (function () {
+        "use strict";
+        const forms = document.querySelectorAll(".needs-validation");
+        Array.from(forms).forEach((form) => {
+          form.addEventListener(
+            "submit",
+            (event) => {
+              if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+              } else {
+                const btn = document.getElementById("submitBtn");
+                btn.disabled = true;
+                btn.innerHTML =
+                  '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Memproses & Mengunggah Berkas...';
+              }
+              form.classList.add("was-validated");
+            },
+            false,
+          );
+        });
+      })();
+    </script>
+  </body>
+</html>
